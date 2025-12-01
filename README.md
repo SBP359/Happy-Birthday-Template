@@ -41,3 +41,9 @@ You can easily personalize this website by modifying the `birthday-website.html`
   - ```823:823:birthday-website.html
             cakeImg.src = 'cake.gif'; // Make sure your cake GIF is named 'cake.gif'
   ```
+
+### Music
+
+The background music used in this repository is "Blue" by Yung Kai.
+
+Copyright © 2024 Yung Kai. All rights reserved.
