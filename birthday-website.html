@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #f9f7f7;
+            color: #333;
+            background-image: linear-gradient(45deg, #f3c1f3 0%, #c71585 100%);
+            position: relative;
+        }
+
+        /* Floating elements */
+        .floating-balloon {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1);
+            animation: float-up 15s linear infinite;
+            z-index: 10;
+            opacity: 0.8;
+        }
+        
+        .balloon-string {
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background-color: rgba(255,255,255,0.6);
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-200px) rotate(20deg);
+            }
+        }
+
+        /* Intro Section - Initial Cover */
+        #intro-cover {
+            background: #e75480; /* Solid pink background */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        #intro-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        #timer-container {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        #timer {
+            font-size: 3.5rem;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(199, 21, 133, 0.3) 100%);
+            padding: 1rem 3rem;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #timer::before {
+            content: '';
+            position: absolute;
+            width: 140%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        #cover-image {
+            max-width: 425px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+
+        /* Main Celebration Section */
+        #celebration {
+            background: linear-gradient(135deg, #f3d9f5 0%, #d896e1 50%, #c71585 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #celebration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff99cc' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        #celebration h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+            background: linear-gradient(45deg, #c71585, #e91e63, #9c27b0, #d81b60);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradient-shift 8s ease infinite, pulse 2s infinite;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #celebration h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #880e4f;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Cool Cake Animation */
+        .cake-container {
+            margin: 2rem auto;
+            position: relative;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .cake-img {
+            max-width: 100%;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 3rem 0;
+            max-width: 1200px;
+            perspective: 1000px;
+        }
+
+        .gallery-item {
+            flex: 0 0 280px;
+            height: 280px;
+            position: relative;
+            overflow: visible;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .gallery-item:nth-child(odd) {
+            transform: rotate(-8deg) translateZ(0);
+        }
+
+        .gallery-item:nth-child(even) {
+            transform: rotate(8deg) translateZ(0);
+        }
+
+        .gallery-item:hover {
+            transform: rotate(0) translateZ(30px) scale(1.1);
+            z-index: 10;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 15px solid #f8d7f8;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(199, 21, 133, 0.5) inset;
+            box-sizing: border-box;
+            background: transparent;
+            z-index: 2;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 30px;
+            background: rgba(0,0,0,0.1);
+            filter: blur(15px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0);
+            filter: saturate(1.2);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #c71585;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Updated Poem Section */
+        #poem {
+            background: linear-gradient(135deg, #f9f1f9 0%, #efd6f0 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #poem::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(219,112,147,0.3) 0%, rgba(219,112,147,0) 70%);
+            top: -100px;
+            left: -100px;
+            border-radius: 50%;
+        }
+
+        #poem::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(199,21,133,0.3) 0%, rgba(199,21,133,0) 70%);
+            bottom: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .poem-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 20px rgba(199, 21, 133, 0.3);
+            position: relative;
+            border: 2px solid rgba(199, 21, 133, 0.5);
+            overflow: hidden;
+        }
+
+        .poem-container::before,
+        .poem-container::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .poem-container h2 {
+            margin-bottom: 2rem;
+            color: #c71585;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .poem-container h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c71585, transparent);
+            margin: 0.5rem auto;
+        }
+
+        .poem-text {
+            font-size: 1.3rem;
+            line-height: 2.2;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #444;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .signature {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            color: #c71585;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Updated Play Music Button */
+        .music-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c71585, #db7093);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .music-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-icon {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            transform: scale(1);
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.8);
+            }
+        }
+
+        /* Confetti animation - Enhanced */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background-color: #f0f;
+            opacity: 0;
+            top: 0;
+            z-index: 100;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+        }
+
+        /* Add continuous confetti container */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* Emoji animation styling */
+        .falling-emoji {
+            position: fixed;
+            font-size: 24px;
+            line-height: 1;
+            opacity: 0;
+            top: 0;
+            z-index: 100;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            pointer-events: none;
+        }
+
+        /* Emoji container */
+        .emoji-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #celebration h1 {
+                font-size: 3rem;
+            }
+
+            #celebration h2 {
+                font-size: 1.5rem;
+            }
+
+            #timer {
+                font-size: 2rem;
+            }
+
+            .gallery-item {
+                flex: 0 0 calc(50% - 20px);
+                height: 250px;
+            }
+
+            .poem-container {
+                padding: 2rem 1rem;
+            }
+
+            .poem-text {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #celebration h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-item {
+                flex: 0 0 100%;
+                max-width: 300px;
+                height: 300px;
+            }
+            
+            #cover-image {
+                max-height: 40vh;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Initial Cover with Timer -->
+    <section id="intro-cover">
+        <img id="cover-image" src="cover-image.png" alt="Birthday Character">
+        <div id="timer">7</div>
+    </section>
+
+    <!-- Main Celebration -->
+    <section id="celebration">
+        <h1 class="floating">Happy Birthday <span id="recipient-name">Friend</span>!</h1>
+        <h2 id="celebration-subtitle">May your day be filled with joy and laughter!</h2>
+
+        <!-- Gallery -->
+        <div class="gallery" id="photo-gallery">
+            <!-- Gallery items will be dynamically added -->
+        </div>
+    </section>
+
+    <!-- Poem Section -->
+    <section id="poem">
+        <div class="poem-container">
+            <h2>A Birthday Wish</h2>
+            <div class="poem-text" id="poem-content">
+                Another year around the sun,<br>
+                A celebration has just begun.<br>
+                May this day bring you delight,<br>
+                And may your future shine so bright.<br><br>
+                
+                With laughter, love, and sweet surprise,<br>
+                May joy dance before your eyes.<br>
+                As candles glow upon your cake,<br>
+                Beautiful memories may you make.
+            </div>
+            <p class="signature">With love, <span id="sender-name">Your Friend</span></p>
+        </div>
+    </section>
+
+    <script>
+        // ======= CUSTOMIZABLE VARIABLES =======
+        // Recipient's Information
+        const recipientName = "NvK";
+        const celebrationSubtitle = "Wishing you an amazing day filled with joy and laughter!";
+        
+        // Sender's Information
+        const senderName = "SBP";
+        
+        // Audio Settings
+        const backgroundMusicPath = "music.mp3"; // Make sure your music file is named 'music.mp3'
+        
+        // Opening Image
+        const coverImagePath = "cover-image.png"; // Changed from "/api/placeholder/800/600"
+        
+        // Gallery Images
+        const galleryImages = [
+            "img2.jpg",
+            "img3.jpg",
+            "img4.jpg",
+            "img5.jpg",
+            "img6.jpg",
+            "img7.jpg"
+        ];
+        
+        // Custom Poem
+        const poemContent = `Another year around the sun,<br>
+                A celebration has just begun.<br>
+                May this day bring you delight,<br>
+                And may your future shine so bright.<br><br>
+                
+                With laughter, love, and sweet surprise,<br>
+                May joy dance before your eyes.<br>
+                As candles glow upon your cake,<br>
+                Beautiful memories may you make.`;
+        
+        // ======= END OF CUSTOMIZABLE VARIABLES =======
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set customizable content
+            document.getElementById('recipient-name').innerText = recipientName;
+            document.getElementById('celebration-subtitle').innerText = celebrationSubtitle;
+            document.getElementById('sender-name').innerText = senderName;
+            document.getElementById('poem-content').innerHTML = poemContent;
+            document.getElementById('cover-image').src = coverImagePath;
+            
+            // Create audio element immediately
+            const audio = new Audio(backgroundMusicPath);
+            audio.loop = true;
+            
+            // Add user interaction handler for the whole document
+            document.addEventListener('click', function initAudio() {
+                audio.play().then(() => {
+                    // Remove the click handler once audio starts
+                    document.removeEventListener('click', initAudio);
+                }).catch(e => console.log('Audio playback failed:', e));
+            }, { once: true });
+            
+            // Countdown timer
+            let countdown = 7;
+            const timerElement = document.getElementById('timer');
+            const introCover = document.getElementById('intro-cover');
+            
+            const timer = setInterval(() => {
+                countdown--;
+                timerElement.innerText = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    
+                    // Hide the intro cover
+                    introCover.style.opacity = '0';
+                    introCover.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        introCover.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        
+                        // Try to play music with a user gesture
+                        try {
+                            audio.play().catch(() => {
+                                console.log('Waiting for user interaction to play audio');
+                            });
+                        } catch (e) {
+                            console.log('Audio playback failed:', e);
+                        }
+                        
+                        // Create initial burst of emojis instead of confetti
+                        createInitialEmojiBurst();
+                        
+                        // Start the continuous gentle emoji fall
+                        startContinuousEmojis();
+                        
+                        // Show cake gif
+                        showCakeGif();
+                        
+                        // Add floating balloons
+                        createBalloons();
+                        
+                        // Create enhanced music button
+                        createMusicButton();
+                    }, 1000);
+                }
+            }, 1000);
+            
+            // Create gallery items
+            const gallery = document.getElementById('photo-gallery');
+            galleryImages.forEach((imgSrc, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                
+                const frame = document.createElement('div');
+                frame.className = 'gallery-frame';
+                
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `Photo ${index + 1}`;
+                
+                const caption = document.createElement('div');
+                caption.className = 'gallery-caption';
+                caption.innerText = `Memory #${index + 1}`;
+                
+                item.appendChild(img);
+                item.appendChild(frame);
+                item.appendChild(caption);
+                gallery.appendChild(item);
+                
+                // Add animation delay for staggered appearance
+                item.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+            });
+        });
+        
+        // Confetti animation
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#ffafcc', '#bde0fe', '#a2d2ff', '#ffc8dd', '#ff85a1', '#fbb1bd', '#c5f0da', '#ffeaa7', '#74b9ff'];
+            const shapes = ['circle', 'square', 'triangle', 'heart', 'star'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random properties
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                const size = Math.random() * 15 + 5;
+                const left = Math.random() * 100 + 'vw';
+                const animationDuration = Math.random() * 4 + 2;
+                
+                // Apply styles
+                confetti.style.backgroundColor = color;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = left;
+                confetti.style.opacity = '1';
+                
+                if (shape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                } else if (shape === 'triangle') {
+                    confetti.style.width = '0';
+                    confetti.style.height = '0';
+                    confetti.style.borderLeft = `${size}px solid transparent`;
+                    confetti.style.borderRight = `${size}px solid transparent`;
+                    confetti.style.borderBottom = `${size * 2}px solid ${color}`;
+                    confetti.style.backgroundColor = 'transparent';
+                } else if (shape === 'heart') {
+                    confetti.style.backgroundColor = 'transparent';
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.transform = 'rotate(-45deg)';
+                    confetti.style.position = 'relative';
+                    
+                    confetti.style.boxShadow = `inset -${size/2}px -${size/2}px 0 0 ${color}, 
+                                               inset -${size/2}px 0 0 0 ${color},
+                                               inset 0 -${size/2}px 0 0 ${color}`;
+                } else if (shape === 'star') {
+                    confetti.style.backgroundColor = 'transparent';
+                    confetti.innerHTML = `<svg width="${size*2}" height="${size*2}" viewBox="0 0 24 24" fill="${color}"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" /></svg>`;
+                }
+                
+                // Animation
+                confetti.style.animation = `fall ${animationDuration}s linear forwards`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                // Add keyframes dynamically
+                const keyframes = `
+                    @keyframes fall {
+                        0% {
+                            transform: translateY(-10px) rotate(0deg);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                
+                const styleSheet = document.createElement('style');
+                styleSheet.type = 'text/css';
+                styleSheet.innerText = keyframes;
+                document.head.appendChild(styleSheet);
+                
+                document.body.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                    styleSheet.remove();
+                }, animationDuration * 1000);
+            }
+        }
+
+        // Add floating balloons to celebration section with magenta colors
+        function createBalloons() {
+            const celebrationSection = document.getElementById('celebration');
+            const balloonColors = ['#c71585', '#db7093', '#e91e63', '#ad1457', '#880e4f', '#ff1493'];
+            
+            for (let i = 0; i < 10; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'floating-balloon';
+                
+                const string = document.createElement('div');
+                string.className = 'balloon-string';
+                
+                // Random properties
+                const size = Math.random() * 30 + 40;
+                const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                const left = Math.random() * 100 + '%';
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 15;
+                
+                // Apply styles
+                balloon.style.width = `${size}px`;
+                balloon.style.height = `${size * 1.2}px`;
+                balloon.style.left = left;
+                balloon.style.background = color;
+                balloon.style.animationDelay = `${delay}s`;
+                balloon.style.animationDuration = `${duration}s`;
+                
+                balloon.appendChild(string);
+                celebrationSection.appendChild(balloon);
+            }
+        }
+
+        // Replace the showCake function with showCakeGif
+        function showCakeGif() {
+            const celebration = document.getElementById('celebration');
+            
+            // Create cake container
+            const cakeContainer = document.createElement('div');
+            cakeContainer.className = 'cake-container';
+            
+            // Create cake image using the GIF
+            const cakeImg = document.createElement('img');
+            cakeImg.src = 'cake.gif'; // Make sure your cake GIF is named 'cake.gif'
+            cakeImg.className = 'cake-img';
+            cakeImg.alt = 'Birthday Cake';
+            
+            // Assemble and add to DOM
+            cakeContainer.appendChild(cakeImg);
+            celebration.insertBefore(cakeContainer, celebration.querySelector('.gallery'));
+        }
+
+        // Replace music button with enhanced version
+        function createMusicButton() {
+            const existingButton = document.querySelector('button');
+            if (existingButton) existingButton.remove();
+            
+            const musicButton = document.createElement('button');
+            musicButton.className = 'music-button';
+            
+            const pulseRing = document.createElement('div');
+            pulseRing.className = 'pulse-ring';
+            
+            const musicIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            musicIcon.setAttribute('viewBox', '0 0 24 24');
+            musicIcon.setAttribute('width', '24');
+            musicIcon.setAttribute('height', '24');
+            musicIcon.classList.add('music-icon');
+            
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z');
+            path.setAttribute('fill', 'white');
+            
+            musicIcon.appendChild(path);
+            musicButton.appendChild(pulseRing);
+            musicButton.appendChild(musicIcon);
+            
+            musicButton.onclick = () => {
+                audio.play();
+                pulseRing.style.animationPlayState = audio.paused ? 'paused' : 'running';
+            };
+            
+            document.body.appendChild(musicButton);
+        }
+
+        // Continuous falling emoji animation with more magenta hearts
+        function startContinuousEmojis() {
+            // Create a container for emojis
+            const emojiContainer = document.createElement('div');
+            emojiContainer.className = 'emoji-container';
+            document.body.appendChild(emojiContainer);
+            
+            // Love and celebration emojis - with more focus on magenta/pink
+            const emojis = [
+                '❤️', '💖', '💕', '💓', '💗', '💝', '💘', '💞', '💟', // Love emojis (more of these)
+                '🎂', '🎉', '🎊', '🎈', '🎁', '🥳', // Celebration emojis
+                '🍰', '✨', '🎵', '👑', '💜'  // More celebratory items with pink/magenta emphasis
+            ];
+            
+            // Create initial batch of emojis
+            createBatchEmojis();
+            
+            // Continue creating emojis at intervals
+            setInterval(createBatchEmojis, 1500);
+            
+            function createBatchEmojis() {
+                // Small quantity for gentle effect
+                const count = Math.floor(Math.random() * 5) + 7; // 7-12 emojis per batch
+                
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        const emoji = document.createElement('div');
+                        emoji.className = 'falling-emoji';
+                        
+                        // Random properties
+                        const selectedEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                        const size = Math.random() * 20 + 15; // Between 15-35px
+                        const left = Math.random() * 100 + 'vw';
+                        const rotateStart = Math.random() * 360;
+                        const rotateEnd = rotateStart + (Math.random() * 360 - 180);
+                        const animationDuration = Math.random() * 8 + 5; // Slower fall (5-13s)
+                        
+                        // Apply styles
+                        emoji.style.fontSize = `${size}px`;
+                        emoji.style.left = left;
+                        emoji.style.opacity = '0';
+                        emoji.textContent = selectedEmoji;
+                        
+                        // Create animation
+                        const keyframes = `
+                            @keyframes emojiFall${i}${Date.now()} {
+                                0% {
+                                    transform: translateY(-20px) rotate(${rotateStart}deg);
+                                    opacity: 0;
+                                }
+                                10% {
+                                    opacity: 1;
+                                }
+                                90% {
+                                    opacity: 1;
+                                }
+                                100% {
+                                    transform: translateY(105vh) rotate(${rotateEnd}deg);
+                                    opacity: 0;
+                                }
+                            }
+                        `;
+                        
+                        const styleSheet = document.createElement('style');
+                        styleSheet.type = 'text/css';
+                        styleSheet.innerText = keyframes;
+                        document.head.appendChild(styleSheet);
+                        
+                        // Apply animation
+                        const animationName = `emojiFall${i}${Date.now()}`;
+                        emoji.style.animation = `${animationName} ${animationDuration}s ease-in forwards`;
+                        
+                        // Add to container
+                        emojiContainer.appendChild(emoji);
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            emoji.remove();
+                            styleSheet.remove();
+                        }, animationDuration * 1000);
+                        
+                    }, i * 300); // Staggered creation
+                }
+            }
+        }
+
+        // Create an initial burst of emojis
+        function createInitialEmojiBurst() {
+            const emojiContainer = document.createElement('div');
+            emojiContainer.className = 'emoji-container';
+            document.body.appendChild(emojiContainer);
+            
+            // Love and celebration emojis
+            const emojis = [
+                '❤️', '💖', '💕', '💓', '💗', '💝',
+                '🎂', '🎉', '🎊', '🎈', '🎁', '🥳',
+                '🍰', '✨', '🎵', '🎶', '🌟', '👑'
+            ];
+            
+            // Create a larger initial burst
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'falling-emoji';
+                    
+                    // Random properties
+                    const selectedEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    const size = Math.random() * 25 + 20; // Slightly larger for initial burst
+                    const left = Math.random() * 100 + 'vw';
+                    const rotation = Math.random() * 360;
+                    const animationDuration = Math.random() * 4 + 3;
+                    
+                    // Apply styles
+                    emoji.style.fontSize = `${size}px`;
+                    emoji.style.left = left;
+                    emoji.style.opacity = '0';
+                    emoji.textContent = selectedEmoji;
+                    
+                    // Create custom animation with unique name
+                    const keyframes = `
+                        @keyframes burstEmoji${i} {
+                            0% {
+                                transform: translateY(50vh) translateX(0) rotate(0deg);
+                                opacity: 0;
+                            }
+                            10% {
+                                opacity: 1;
+                            }
+                            100% {
+                                transform: translateY(${-50 + Math.random() * 100}vh) translateX(${-50 + Math.random() * 100}vw) rotate(${rotation}deg);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    
+                    const styleSheet = document.createElement('style');
+                    styleSheet.type = 'text/css';
+                    styleSheet.innerText = keyframes;
+                    document.head.appendChild(styleSheet);
+                    
+                    // Apply animation
+                    emoji.style.animation = `burstEmoji${i} ${animationDuration}s ease-out forwards`;
+                    
+                    // Add to container
+                    emojiContainer.appendChild(emoji);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        emoji.remove();
+                        styleSheet.remove();
+                    }, animationDuration * 1000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
